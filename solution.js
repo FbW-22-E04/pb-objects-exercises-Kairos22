@@ -75,10 +75,31 @@ function isEqual (a, b) {
 console.log(isEqual(data5, data51)); // true  
 console.log(isEqual(data5, data52)); // false
 
-// //6
-// const data6 = { a: { b: [1, 2, 3] } }
-// //write your code here 
-// console.log(invoke(data6, 'a.b', 'splice', [1, 2])) // [2, 3]
+//6
+const data6 = { a: { b: [1, 2, 3] } }
+//write your code here 
+function invoke(obj, ab, spl, arr) {
+  const newArr = ab.split(".");
+  console.log(newArr);
+  const result = newArr.reduce((acc, key) => {
+    console.log(`Key is ${key}`);
+    console.log(`acc[key] ${acc[key]}`);
+    console.log(`obj[key] ${obj[key]}`);
+    acc = acc[key] === undefined ? obj[key] : acc[key];
+    return acc;
+  }, {});
+  // console.log(result);
+  console.log(Array.prototype[spl].apply(result, arr));
+  // obj[]
+  // console.log(obj);
+  return obj;
+}
+// function invoke(obj, str, func, arr) {
+//   const code = "obj" + "." + str + "." + func + "(" + arr + ");";
+//   console.log(code);
+//   return eval(code);
+// }
+console.log(invoke(data6, 'a.b', 'splice', [1, 2])) // [2, 3]
 
 
 // //7
